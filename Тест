@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6.1.1.1 Тақырыптық Тест</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            padding: 20px;
+            color: #333;
+        }
+        .quiz-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #1a73e8;
+            font-size: 22px;
+            margin-bottom: 25px;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .question p {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .options label {
+            display: block;
+            padding: 8px 12px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border: 1px solid #dcdfe6;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .options label:hover {
+            background: #e8f0fe;
+        }
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn-submit:hover {
+            background-color: #1557b0;
+        }
+        #result {
+            margin-top: 25px;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 6px;
+            display: none;
+        }
+        .success { background-color: #d4edda; color: #155724; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>6.1.1.1 Жүйелік блок, компьютер жадысы және процессор</h1>
+    <form id="quizForm">
+        
+        <!-- 1-сұрақ -->
+        <div class="question">
+            <p>1. Компьютер өшкенде ондағы ақпарат жойылатын энергияға тәуелді жады түрі қандай?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="A"> A) ROM (Тұрақты жады)</label>
+                <label><input type="radio" name="q1" value="B"> B) RAM (Жедел жады)</label>
+                <label><input type="radio" name="q1" value="C"> C) Қатқыл диск (HDD)</label>
+            </div>
+        </div>
+
+        <!-- 2-сұрақ -->
+        <div class="question">
+            <p>2. Процессор мен жедел жады арасындағы деректерді алмасуды жеделдететін аса шапшаң жады:</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="A"> A) Кэш-жады</label>
+                <label><input type="radio" name="q2" value="B"> B) Тұрақты жады (ROM)</label>
+                <label><input type="radio" name="q2" value="C"> C) Снартты карта</label>
+            </div>
+        </div>
+
+        <!-- 3-сұрақ -->
+        <div class="question">
+            <p>3. Процессордың бір секундта орындайтын операциялар санын көрсететін сипаттамасы:</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="A"> A) Ядро саны</label>
+                <label><input type="radio" name="q3" value="B"> B) Разрядтылық</label>
+                <label><input type="radio" name="q3" value="C"> C) Тактілік жиілік</label>
+            </div>
+        </div>
+
+        <!-- 4-сұрақ -->
+        <div class="question">
+            <p>4. Компьютерді іске қосуға қажетті BIOS бағдарламасы қай жадыда сақталады?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="A"> A) ROM (Тұрақты жады)</label>
+                <label><input type="radio" name="q4" value="B"> B) RAM (Жедел жады)</label>
+                <label><input type="radio" name="q4" value="C"> C) Кэш-жады</label>
+            </div>
+        </div>
+
+        <!-- 5-сұрақ -->
+        <div class="question">
+            <p>5. Компьютерде бір уақытта бірнеше тапсырманы сапалы әрі жылдам орындауға не тікелей әсер етеді?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="A"> A) Монитор диагоналы</label>
+                <label><input type="radio" name="q5" value="B"> B) Процессордың ядро саны</label>
+                <label><input type="radio" name="q5" value="C"> C) Пернетақта пернелерінің саны</label>
+            </div>
+        </div>
+
+        <button type="button" class="btn-submit" onclick="checkQuiz()">Тестті тексеру</button>
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    function checkQuiz() {
+        const answers = { q1: 'B', q2: 'A', q3: 'C', q4: 'A', q5: 'B' };
+        let score = 0;
+        let total = 5;
+
+        for (let q in answers) {
+            let selected = document.querySelector(`input[name="${q}"]:checked`);
+            if (selected && selected.value === answers[q]) {
+                score++;
+            }
+        }
+
+        const resultDiv = document.getElementById('result');
+        resultDiv.className = 'success';
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = `Сіздің нәтижеңіз: ${score} / ${total} дұрыс! (${(score/total)*100}%)`;
+    }
+</script>
+
+</body>
+</html>
